@@ -1,0 +1,63 @@
+<body>
+  <h1>Job Recommendation!</h1>
+
+
+        {{> Initial_login}}
+        
+</body>
+<template name = "Initial_login">
+  <form class = 'buttons'>
+    <button class="employee" value="employee">Employee</button>
+    <button class="seeker" value="seeker">Seeker</button>
+  </form>
+
+  {{#if option}}
+    <p>Enter details of {{user}}</p>
+    {{> detailsLogin}}
+  {{/if}}
+</template>
+
+<template name= 'detailsLogin'>
+  {{#if currentUser}}
+      {{> dashboard}}
+      {{> hello}}
+    {{else}}
+      {{> register}}
+      {{> login}}
+  {{/if}}
+</template>
+
+<template name="register">
+    <form class = "register">
+        <pre><p>EMAIL    <input type="email" name="registerEmail"> </p></pre>
+        <pre><p>PASSWORD <input type="password" name="registerPassword"></p></pre>
+        <input type="submit" value="Register">
+ <!--        <input type="submit" value="Login" class="login"> -->
+</form>
+</template>
+
+<template name = "login">
+    <form>
+      <pre><p>EMAIL    <input type="email" name="loginEmail"> </p></pre>
+      <pre><p>PASSWORD <input type="password" name="loginPassword"></p></pre>
+      <input type="submit" value="Login">
+  </form>
+</template>
+<template name="dashboard">
+    <p>You're logged in.</p>
+    <button class = "logout">Logout</button>
+</template>
+
+<template name="hello">
+  <pre><button class = "showData">Click Me</button></pre>
+  {{#if tempButton}}
+       {{> dataViewer}}
+  {{/if}}
+</template>
+
+<template name="dataViewer">
+<!--     {{#if currentUser}} -->
+      {{> reactiveTable collection=ClientDummy multiColumnSort = true}}
+<!--      {{/if}} -->
+</template>
+
