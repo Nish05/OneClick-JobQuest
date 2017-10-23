@@ -57,7 +57,14 @@
 
 <template name="dataViewer">
 <!--     {{#if currentUser}} -->
-      {{> reactiveTable collection=ClientDummy multiColumnSort = true}}
+      <ul class ="list-group sortable">
+      {{#each jobs}}
+          <li data-id="{{_id}}" class="list-group-item clearfix">
+          <span class="pull-left">{{Order}}. {{job_title}} by {{company_name}}</span>
+          </li>
+      {{/each}}
+      </ul>
+<!--       {{> reactiveTable collection=ClientDummy multiColumnSort = true}} -->
 <!--      {{/if}} -->
 </template>
 
