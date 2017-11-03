@@ -12,7 +12,7 @@
   </form>
 
   {{#if option}}
-    <p>Enter details of {{user}}</p>
+<!--     <p>Enter details of {{user}}</p> -->
     {{> detailsLogin}}
   {{/if}}
 </template>
@@ -57,14 +57,25 @@
 
 <template name="dataViewer">
 <!--     {{#if currentUser}} -->
-      <ul class ="list-group sortable">
-      {{#each jobs}}
-          <li data-id="{{_id}}" class="list-group-item clearfix">
-          <span class="pull-left">{{Order}}. {{job_title}} by {{company_name}}</span>
-          </li>
-      {{/each}}
-      </ul>
-<!--       {{> reactiveTable collection=ClientDummy multiColumnSort = true}} -->
-<!--      {{/if}} -->
+<!--       <p>The current user is {{user}}</p> -->
+     <!--  <p>Current user is {{user}} </p> -->
+      {{#if user = "emp"}} 
+        <ul class ="list-group sortable" style="list-style-type:none">
+          {{#each resEmp}}
+            <li data-id="{{_id}}" class="list-group-item clearfix">
+              <span class="pull-left">{{Order}}. {{job_title}} by {{company_name}}</span>
+            </li>
+          {{/each}}
+        </ul> 
+      {{/if}}
+      {{#if user = "skr"}}
+          <ul class ="list-group sortable" style="list-style-type:none">
+            {{#each resSeeker}}
+              <li data-id="{{_id}}" class="list-group-item clearfix">
+              <span class="pull-left">{{Name}} {{Content}}</span>
+              </li>
+            {{/each}}
+          </ul>
+      {{/if}} 
 </template>
 

@@ -1,21 +1,22 @@
 import { Template } from 'meteor/templating';
-import { Account_Employees } from '../api/accounts.js';
-import { Account_Seekers } from '../api/accounts.js';
+// import { Account_Employees } from '../api/accounts.js';
+// import { Account_Seekers } from '../api/accounts.js';
 import { Meteor } from 'meteor/meteor';
 import './body.html';
 import { sortable } from 'html5sortable';
 // import { check } from 'meteor/check';
 
 Postings = new Mongo.Collection('jobPostings');
+Resumes = new Mongo.Collection('resume');
 
 Template.Initial_login.events({
 	'click .buttons' : function(event) {
 		event.preventDefault();
 	   	var action = event.target.value;
        	if(action == 'employee'){
-       		Session.set({'user':'employee','option':true});
+       		Session.set({'user':'emp','option':true});
        	} else{
-       	    Session.set({'user':'seeker','option':true});
+       	    Session.set({'user':'skr','option':true});
        	}
 	},
        
@@ -25,9 +26,9 @@ Template.Initial_login.helpers({
     "option" : function(){
     		return Session.get('option');
     },
-    "user" : function(){
-    		return Session.get('user');
-    },
+    // "user" : function(){
+    // 		return Session.get('user');
+    // },
 });
 // Registration 
 Template.register.events({
@@ -86,10 +87,8 @@ Template.hello.events({
 Template.hello.helpers({
  
   "tempButton" : function(){
-  			if(Session.get('button')){
+  			// if(Session.get('button')){
 				return Session.get('button');
-  			}
-  			
 	},
 });
 let initSortable = ( sortableClass ) => {
@@ -121,7 +120,7 @@ let updateIndexes = ( sortableClass ) => {
 
 // 	ClientDummy(){ 
 // 		Meteor.subscribe('Postings', () => {
-//           console.log("Line number 124 .........");
+//           consolse.log("Line number 124 .........");
 //           // initSortable( '.sortable' );
 //     });
 // 	 	// console.log(ClientDummy.find({}).fetch());	 
@@ -135,25 +134,40 @@ Template.dataViewer.onCreated( () => {
     template.subscribe('Posting', () => {
           initSortable( '.sortable' );
     });
+    template.subscribe('Resume', () => {
+          initSortable( '.sortable' );
+    });
 });
 Template.dataViewer.helpers({
-    "jobs" : function(){
-      return Postings.find();
+    "user" : function(){
+        return Session.get('user');
+    },
+    "resEmp" : function(){
+       if(Session.get('user') == 'emp'){
+          return Postings.find();
+       } 
+     },
+     "resSeeker" : function() {
+
+        // console.log('Currently in seeker session');
+        //   console.log('Resumes : '+ Resumes.find());
+          return Resumes.find();
+       // }
     },
 });
-// Meteor.methods({
+Meteor.methods({
   
-//   'updatePostingOrder'( posts ) {
-//    console.log("Hellloooooo......");
-//     check( posts, [{
-//       _id: String,
-//       Order: Number
-//     }]);
+  'updatePostingOrder'( posts ) {
+   // console.log("Hellloooooo......");
+    check( posts, [{
+      _id: String,
+      Order: Number
+    }]);
 
-//     for ( let post of posts ) {
-//       posts.update( { _id: post._id }, { $set: { Order: post.Order } } );
-//     }
-//   }
-// });
+    for ( let post of posts ) {
+      posts.update( { _id: post._id }, { $set: { Order: post.Order } } );
+    }
+  }
+});
 
 
