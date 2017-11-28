@@ -26,9 +26,9 @@ Meteor.methods({
     }]);
 
     for ( let post of posts ) {
-      console.log("Post Info : id "+post._id+" Order : "+post.Order);
-      _id = post._id;
-      Postings.update( { _id }, {$set: { Order: post.Order }, } );
+      // console.log("Post Info : id "+post._id+" Order : "+post.Order);
+      // _id = post._id;
+      Postings.update( { "_id" : post._id}, {$set: { Order: post.Order } } );
     }
   }
 });

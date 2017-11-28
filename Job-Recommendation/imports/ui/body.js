@@ -142,32 +142,20 @@ Template.dataViewer.helpers({
     "user" : function(){
         return Session.get('user');
     },
+    "resSeeker" : function() {
+        //   console.log('Resumes : '+ Resumes.find());
+        if(Session.get('user') == 'emp'){
+          return Resumes.find();
+       } 
+       // }
+    },
     "resEmp" : function(){
-       if(Session.get('user') == 'emp'){
+       if(Session.get('user') == 'skr'){
           return Postings.find();
        } 
      },
-     "resSeeker" : function() {
-
-        // console.log('Currently in seeker session');
-        //   console.log('Resumes : '+ Resumes.find());
-          return Resumes.find();
-       // }
-    },
+     
 });
-Meteor.methods({
-  
-  'updatePostingOrder'( posts ) {
-   // console.log("Hellloooooo......");
-    check( posts, [{
-      _id: String,
-      Order: Number
-    }]);
 
-    for ( let post of posts ) {
-      posts.update( { _id: post._id }, { $set: { Order: post.Order } } );
-    }
-  }
-});
 
 
