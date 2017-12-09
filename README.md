@@ -24,9 +24,9 @@ Setup Meteor with :
 
 Change your current directory to meteor application directory
 ```
-nohup meteor --port 8080 &
+meteor npm install --save html5sortable
+meteor
 meteor add session
-meteor add themeteorchef:html5-sortable
 meteor remove autopublish
 ```
 ### Installations - Load Data 
