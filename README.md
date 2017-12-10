@@ -35,14 +35,13 @@ meteor
 ```
 ### Installations - Load Data 
 Load data into meteor mongo with :
-
+Run the files in the Python_Script directory with :
 ```
-$ iPython
-$ %run WebScraper_3.ipynb
-$ %run ResumeParser.ipynb
-$ %run ResumeCleaner.ipynb
-$ %run IntersectionResumePosting.ipynb
-$ %run Stable-Matching-Jobs-Resume.ipynb
+$ python WebScraper_3.py (destination_filename) testData.xls
+$ python ResumeParser.py (resume directory)
+$ python ResumeCleaner.py
+$ python IntersectionResumePosting.py
+$ python Stable-Matching-Jobs-Resume.py
 ```
 
 ## Built With
