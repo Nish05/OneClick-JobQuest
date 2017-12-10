@@ -31,7 +31,6 @@ meteor npm install --save bcrypt
 meteor add session
 meteor remove autopublish
 meteor
-
 ```
 ### Installations - Load Data 
 Load data into meteor mongo with :
