@@ -12,7 +12,6 @@
   </form>
 
   {{#if option}}
-<!--     <p>Enter details of {{user}}</p> -->
     {{> detailsLogin}}
   {{/if}}
 </template>
@@ -32,7 +31,6 @@
         <pre><p>EMAIL    <input type="email" name="registerEmail"> </p></pre>
         <pre><p>PASSWORD <input type="password" name="registerPassword"></p></pre>
         <input type="submit" value="Register">
- <!--        <input type="submit" value="Login" class="login"> -->
 </form>
 </template>
 
@@ -56,14 +54,11 @@
 </template>
 
 <template name="dataViewer">
-<!--     {{#if currentUser}} -->
-<!--       <p>The current user is {{user}}</p> -->
-     <!--  <p>Current user is {{user}} </p> -->
       {{#if user = "emp"}} 
         <ul class ="list-group sortable" style="list-style-type:none">
           {{#each resSeeker}}
               <li data-id="{{_id}}" class="list-group-item clearfix">
-              <span class="pull-left">{{Name}} {{Content}}</span>
+              <span class="pull-left">{{Name}}</span>
               </li>
           {{/each}}
         </ul> 

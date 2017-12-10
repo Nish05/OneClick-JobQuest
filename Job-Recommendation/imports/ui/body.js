@@ -1,13 +1,10 @@
 import { Template } from 'meteor/templating';
-// import { Account_Employees } from '../api/accounts.js';
-// import { Account_Seekers } from '../api/accounts.js';
 import { Meteor } from 'meteor/meteor';
 import './body.html';
 import { sortable } from 'html5sortable';
-// import { check } from 'meteor/check';
 
-Postings = new Mongo.Collection('jobPostings');
-Resumes = new Mongo.Collection('resume');
+Postings = new Mongo.Collection('cleanPostings_stem_test');
+Resumes = new Mongo.Collection('cleanResume_stem_test');
 
 Template.Initial_login.events({
 	'click .buttons' : function(event) {
@@ -26,9 +23,6 @@ Template.Initial_login.helpers({
     "option" : function(){
     		return Session.get('option');
     },
-    // "user" : function(){
-    // 		return Session.get('user');
-    // },
 });
 // Registration 
 Template.register.events({
@@ -37,7 +31,6 @@ Template.register.events({
             var email = event.target.registerEmail.value;
         	  var password = event.target.registerPassword.value;
             console.log(password);
-            // db.Account_Employees.insert({email:});
             Accounts.createUser({
     			    email: email,
             	password: password
@@ -51,7 +44,6 @@ Template.login.events({
             event.preventDefault();
             var emailVar = event.target.loginEmail.value;
         	  var passwordVar = event.target.loginPassword.value;
-            // console.log("Form submitted.");
             Meteor.loginWithPassword(emailVar, passwordVar, function(error){
             if (error) {
                console.log("ERROR: "+ error.reason);
@@ -80,33 +72,26 @@ Template.hello.events({
 			// return temp;
 	},
 });
-// Template.hello.onCreated(function helloOnCreated() {
-//   this.counter = new ReactiveVar(0);
-// });
+
 
 Template.hello.helpers({
  
   "tempButton" : function(){
-  			// if(Session.get('button')){
 				return Session.get('button');
 	},
 });
 let initSortable = ( sortableClass ) => {
   let sortableList = $( sortableClass );
-  // console.log("Sortable list : "+ sortableList);
   sortableList.sortable( 'destroy' );
   sortableList.sortable();
   sortableList.sortable().off( 'sortupdate' );
   sortableList.sortable().on( 'sortupdate', () => {
-    // console.log("On line 102");
     updateIndexes( '.sortable' );
   });
 };
 let updateIndexes = ( sortableClass ) => {
   let items = [];
-  // console.log("Hellllllooooooooo.......");
   $( `${sortableClass} li` ).each( ( index, element ) => {
-    // console.log("Id : "+$( element ).data( 'id' )+"Order : "+ (index+1));
     items.push( { _id: $( element ).data( 'id' ), Order: (index + 1) } );
   });
   Meteor.call( 'updatePostingOrder', items, ( error ) => {
@@ -115,19 +100,6 @@ let updateIndexes = ( sortableClass ) => {
     }
   });
 };
-
-// Template.dataViewer.helpers({
-
-// 	ClientDummy(){ 
-// 		Meteor.subscribe('Postings', () => {
-//           consolse.log("Line number 124 .........");
-//           // initSortable( '.sortable' );
-//     });
-// 	 	// console.log(ClientDummy.find({}).fetch());	 
-// 	 	// return ClientDummy.find({}).fetch();z
-// 	},
-	
-// });
 Template.dataViewer.onCreated( () => {
   let template = Template.instance();
   
@@ -143,11 +115,9 @@ Template.dataViewer.helpers({
         return Session.get('user');
     },
     "resSeeker" : function() {
-        //   console.log('Resumes : '+ Resumes.find());
         if(Session.get('user') == 'emp'){
           return Resumes.find();
        } 
-       // }
     },
     "resEmp" : function(){
        if(Session.get('user') == 'skr'){
