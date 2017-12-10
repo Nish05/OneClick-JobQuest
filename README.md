@@ -25,9 +25,13 @@ Setup Meteor with :
 Change your current directory to meteor application directory
 ```
 meteor npm install --save html5sortable
-meteor
+meteor npm install --save babel-runtime
+meteor npm install --save core-js
+meteor npm install --save bcrypt
 meteor add session
 meteor remove autopublish
+meteor
+
 ```
 ### Installations - Load Data 
 Load data into meteor mongo with :
@@ -35,8 +39,8 @@ Load data into meteor mongo with :
 ```
 $ iPython
 $ %run WebScraper_3.ipynb
-$ %run Resume_Parser.ipynb
-$ %run Resume_Cleaner.ipynb
+$ %run ResumeParser.ipynb
+$ %run ResumeCleaner.ipynb
 $ %run IntersectionResumePosting.ipynb
 $ %run Stable-Matching-Jobs-Resume.ipynb
 ```
